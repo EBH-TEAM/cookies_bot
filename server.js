@@ -1,8 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-
-puppeteer.use(StealthPlugin());
+const puppeteer = require('puppeteer');
 
 const app = express();
 app.use(express.json());
@@ -21,14 +18,17 @@ app.post('/get-cookie', async (req, res) => {
     let browser = null;
     
     try {
+        // Render-এর জন্য Chromium path নির্দিষ্ট করে দেওয়া
         browser = await puppeteer.launch({
             headless: true,
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-accelerated-2d-canvas',
-                '--disable-gpu'
+                '--disable-gpu',
+                '--window-size=1920,1080'
             ]
         });
         
@@ -57,6 +57,7 @@ app.post('/get-cookie', async (req, res) => {
         
         if (currentUrl.includes('challenge') || currentUrl.includes('two_factor')) {
             if (twofa) {
+                await page.waitForTimeout(3000);
                 const twofaInput = await page.$('input[name="verificationCode"]');
                 if (twofaInput) {
                     await page.type('input[name="verificationCode"]', twofa, { delay: 100 });
