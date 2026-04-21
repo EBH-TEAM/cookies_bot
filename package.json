@@ -1,7 +1,7 @@
 {
   "name": "instagram-cookie-bot",
   "version": "1.0.0",
-  "description": "Instagram Cookie Extractor Bot API with TOTP Support",
+  "description": "Instagram Cookie Extractor Bot API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -16,4 +16,4 @@
   "engines": {
     "node": ">=18.0.0"
   }
-}
+}}
