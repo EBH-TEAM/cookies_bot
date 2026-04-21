@@ -1,15 +1,18 @@
 {
-  "name": "railway-puppeteer-app",
+  "name": "railway-ig-bot",
   "version": "1.0.0",
-  "description": "Railway Puppeteer Starter",
+  "description": "Instagram Cookie Bot",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
+    "cors": "^2.8.5",
     "puppeteer": "^21.6.0",
-    "cors": "^2.8.5"
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "speakeasy": "^2.0.0"
   },
   "engines": {
     "node": "20.x"
